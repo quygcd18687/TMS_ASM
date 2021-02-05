@@ -279,7 +279,7 @@
     <Content Include="Views\Admins\Create.cshtml" />
     <Content Include="Views\Staffs\Index.cshtml" />
     <Content Include="Views\Trainees\Create.cshtml" />
-    <Content Include="Views\Staffs\Create.cshtml" />
+    <Content Include="Views\Staffs\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

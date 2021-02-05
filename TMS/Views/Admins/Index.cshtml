@@ -1,6 +1,11 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    @model IEnumerable<TMS.Models.Account>
+    @{
+        ViewBag.Title = "Profiles";
+    }
+    <h2>Admin Index</h2>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -16,11 +21,40 @@
         </div>
     </div>
     <table>
-           <tr>
-            <td><div>@Html.ActionLink("Cteate New Member", "Create", "Trainees", null, new { @class = "btn btn-primary" })</div></td> 
-            <td><div>@Html.ActionLink("Management Staff", "Index", "Staffs", null, new { @class = "btn btn-primary" })</div></td
-            <td><div>@Html.ActionLink("Management Trainer", "Index", "Trainers", null, new { @class = "btn btn-primary" })</div></td>
-            </tr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>User Id</th>
+                    <th>User Name</th>
+                    <th>User Roles</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.UserName</td>
+                        <td>@item.Roles</td>
+                        <td>
+                            @Html.ActionLink("Change password", "ResetPassword", "Account", new { id = item.Id },
+
+                                         new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete", "DeleteAccount", "Staffs", new { id = item.Id },
+
+                                         new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <tr>
+            <td>@Html.ActionLink("Cteate New Member", "Create", "Trainees", null, new { @class = "btn btn-primary" })</td>
+            <td>@Html.ActionLink("Management Staff", "Index", "Staffs", null, new { @class = "btn btn-primary" })</td>
+            <td>@Html.ActionLink("Management Trainer", "Index", "Trainers", null, new { @class = "btn btn-primary" })</td>
+        </tr>
     </table>
 
 </body>
