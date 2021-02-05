@@ -1,0 +1,32 @@
+﻿@model  IEnumerable<TMS.Models.Staff>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Staff Infomations</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Trainee #</th>
+            <th>Trainee Name</th>
+            <th>Acctions</th>          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.UserName</td>
+                <td class="btn-group">
+                    @Html.ActionLink("Create a Staff", "CreateStaff", "accounts",
+                                new { id = item.Id },
+                                new { @class = "btn btn-primary" })
+
+                </td>
+            </tr>
+        }
+    </tbody>
+    @Html.ActionLink("Back", "Index", "Admins",
+    null,
+    new { @class = "btn btn-primary" })

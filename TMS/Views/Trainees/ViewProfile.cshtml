@@ -1,0 +1,24 @@
+﻿@model TMS.Models.Trainee
+@{
+    ViewBag.Title = "ViewProfile";
+}
+
+<h2>Trainee Details</h2>
+
+<tbody>
+   
+        <tr>
+            <td>@Model.Id</td>
+            <td>@Model.UserName</td>
+            <td>@Model.Education</td>
+            <td>@Model.Email</td>
+            <td>@Model.Pro_Language</td>
+            
+        </tr>
+    
+</tbody>
+<div>
+            @Html.ActionLink("Back", "Index", "Trainees",
+        null,
+        new { @class = "btn btn-primary" })
+</div>

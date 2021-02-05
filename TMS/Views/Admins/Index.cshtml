@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("Training Management System ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <table>
+           <tr>
+            <td><div>@Html.ActionLink("Cteate New Member", "Create", "Trainees", null, new { @class = "btn btn-primary" })</div></td> 
+            <td><div>@Html.ActionLink("Management Staff", "Index", "Staffs", null, new { @class = "btn btn-primary" })</div></td
+            <td><div>@Html.ActionLink("Management Trainer", "Index", "Trainers", null, new { @class = "btn btn-primary" })</div></td>
+            </tr>
+    </table>
+
+</body>
+</html>

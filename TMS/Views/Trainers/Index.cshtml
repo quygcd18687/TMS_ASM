@@ -1,0 +1,38 @@
+﻿@model  IEnumerable<TMS.Models.Trainer>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Trainer Infomations</h2>
+@Html.ActionLink("Update", "UpdateProfile", "Trainers", null, new { @class = "btn btn-primary" })
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Trainer #</th>
+            <th>Trainer Name</th>
+            <th>Age</th>
+            <th>phone</th>
+            <th>Email</th>
+            <th>Course</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Age</td>
+                <td>@item.Phone</td>
+                <td>@item.Email</td>
+                <th>@item.Course</th>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Back", "Index", "Admins",
+       null,
+       new { @class = "btn btn-primary" })
+</div>
+

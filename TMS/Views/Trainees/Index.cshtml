@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TMS.Models.Trainee>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index Task</h2>
+
+<form>
+    <label for="fname">Search by Task Name:</label><br>
+    <input type="text" id="fname" name="fname"><br>
+    <button type="submit" class="btn btn-primary">Search</button>
+
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Trainee #</th>
+            <th>Trainee Name</th>
+            <th>Education</th>
+            <th>Email</th>
+            <th>Program Language</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.UserName</td>
+            <td>@item.Education</td>
+            <td>@item.Email</td>
+            <td>@item.Pro_Language</td>
+            <td>
+                <a href="" class="btn btn-default">Edit</a>
+                <a href="" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@Html.ActionLink("Back", "Index", "Admins",
+    null,
+    new { @class = "btn btn-primary" })
