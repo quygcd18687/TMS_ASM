@@ -16,9 +16,9 @@ namespace TMS.Controllers
         // GET: Admins
         public ActionResult Index()
         {
-            var AccountList = _context.Users.OfType<Account>().ToList();
-            return View(AccountList);
+            return View();
         }
+
         
     }
 }

@@ -6,7 +6,7 @@
 <h2>Trainee Home</h2>
 
 <form>
-    <label for="fname">Search by Task Name:</label><br>
+    <label for="fname">Search by trainee Name:</label><br>
     <input type="text" id="fname" name="fname"><br>
     <button type="submit" class="btn btn-primary">Search</button>
 
@@ -15,7 +15,6 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Trainee #</th>
             <th>Trainee Name</th>
             <th>Education</th>
             <th>Email</th>
@@ -28,19 +27,25 @@
         @foreach (var item in Model)
         {
         <tr>
-            <td>@item.Id</td>
             <td>@item.UserName</td>
             <td>@item.Education</td>
             <td>@item.Email</td>
             <td>@item.Pro_Language</td>
             <td>
-                <a href="" class="btn btn-default">Edit</a>
-                <a href="" class="btn btn-danger">Delete</a>
+                @Html.ActionLink("Details Infomation", "ViewProfile", "Trainees",
+                                                          new { id = item.Id },
+                                                          new { @class = "btn btn-primary", style = "margin :5px" })
+                @Html.ActionLink("Update this Trainee", "Update", "Trainees",
+                                                      new { id = item.Id },
+                                                      new { @class = "btn btn-danger", style = "margin :5px" })
+                @Html.ActionLink("Delete This trainee", "Delete", "Trainees",
+                                                      new { id = item.Id },
+                                                      new { @class = "btn btn-primary", style = "margin :5px" })
             </td>
         </tr>
         }
     </tbody>
 </table>
-@Html.ActionLink("Back", "Index", "Admins",
+@Html.ActionLink("Back", "Index", "Trainees",
     null,
     new { @class = "btn btn-primary" })

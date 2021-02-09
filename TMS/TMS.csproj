@@ -273,13 +273,12 @@
     <Content Include="Views\Trainees\Index.cshtml" />
     <Content Include="Views\Trainees\ViewProfile.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
-    <Content Include="Views\Admins\Index.cshtml" />
-    <Content Include="Views\Trainers\UpdateProfile.cshtml" />
+    <Content Include="Views\Trainers\Update.cshtml" />
     <Content Include="Views\Trainers\Index.cshtml" />
-    <Content Include="Views\Admins\Create.cshtml" />
     <Content Include="Views\Staffs\Index.cshtml" />
-    <Content Include="Views\Trainees\Create.cshtml" />
+    <Content Include="Views\Trainees\Update.cshtml" />
     <Content Include="Views\Staffs\Details.cshtml" />
+    <Content Include="Views\Trainers\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
