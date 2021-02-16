@@ -9,9 +9,7 @@ namespace TMS.Models
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        [Required]
-        public int CatId { get; set; }
         public Category Category { get; set; }
-        public object CategoryId { get; internal set; }
+        public int CategoryId { get; set; }
     }
 }

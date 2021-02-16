@@ -17,9 +17,9 @@ namespace TMS.Controllers
         }
         public ActionResult Index()
         {
-            //var courseslist = _context.Courses.ToList();
-            //return View(courseslist);
+            var courses = _context.Courses.Include(c => c.Categoery).ToList();
             return View();
+
         }
 
     }

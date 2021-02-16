@@ -198,6 +198,14 @@
     <Compile Include="Migrations\202102041620360_Courses.Designer.cs">
       <DependentUpon>202102041620360_Courses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102090148315_UpdateCoursesTable.cs" />
+    <Compile Include="Migrations\202102090148315_UpdateCoursesTable.Designer.cs">
+      <DependentUpon>202102090148315_UpdateCoursesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102160159317_AddFKtoCategoryTable.cs" />
+    <Compile Include="Migrations\202102160159317_AddFKtoCategoryTable.Designer.cs">
+      <DependentUpon>202102160159317_AddFKtoCategoryTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -306,6 +314,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102041620360_Courses.resx">
       <DependentUpon>202102041620360_Courses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102090148315_UpdateCoursesTable.resx">
+      <DependentUpon>202102090148315_UpdateCoursesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102160159317_AddFKtoCategoryTable.resx">
+      <DependentUpon>202102160159317_AddFKtoCategoryTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

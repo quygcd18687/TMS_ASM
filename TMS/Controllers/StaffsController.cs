@@ -22,5 +22,12 @@ namespace TMS.Controllers
             var staffInfo = _context.Users.OfType<Staff>().SingleOrDefault(m => m.Id == id);
             return View(staffInfo);
         }
+        public ActionResult Delete(string id)
+        {
+            var trainerDb = _context.Trainers.SingleOrDefault(t => t.Id == id);
+            _context.Trainers.Remove(trainerDb);
+            _context.SaveChanges();
+            return View();
+        }
     }
 }
