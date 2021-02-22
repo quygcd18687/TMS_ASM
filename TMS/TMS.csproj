@@ -176,6 +176,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
+    <Compile Include="Controllers\AssignedCourseController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -206,6 +207,18 @@
     <Compile Include="Migrations\202102160159317_AddFKtoCategoryTable.Designer.cs">
       <DependentUpon>202102160159317_AddFKtoCategoryTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102220328542_UpdateDbforCourseAndCategories.cs" />
+    <Compile Include="Migrations\202102220328542_UpdateDbforCourseAndCategories.Designer.cs">
+      <DependentUpon>202102220328542_UpdateDbforCourseAndCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102221449167_UpdateDbToCourse.cs" />
+    <Compile Include="Migrations\202102221449167_UpdateDbToCourse.Designer.cs">
+      <DependentUpon>202102221449167_UpdateDbToCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102221524047_updateDbAcconut.cs" />
+    <Compile Include="Migrations\202102221524047_updateDbAcconut.Designer.cs">
+      <DependentUpon>202102221524047_updateDbAcconut.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -221,6 +234,12 @@
     <Compile Include="Models\Trainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AssignCourseForTrainee.cs" />
+    <Compile Include="ViewModels\AssignCourseForTrainer.cs" />
+    <Compile Include="ViewModels\ChangeAssignForTrainee.cs" />
+    <Compile Include="ViewModels\ChangeAssignForTrainer.cs" />
+    <Compile Include="ViewModels\CourseCategoryViewModels.cs" />
+    <Compile Include="ViewModels\ListCourseView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -280,17 +299,26 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Trainees\Index.cshtml" />
     <Content Include="Views\Trainees\ViewProfile.cshtml" />
-    <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Trainers\Update.cshtml" />
     <Content Include="Views\Trainers\Index.cshtml" />
     <Content Include="Views\Staffs\Index.cshtml" />
     <Content Include="Views\Trainees\Update.cshtml" />
     <Content Include="Views\Staffs\Details.cshtml" />
     <Content Include="Views\Trainers\Details.cshtml" />
+    <Content Include="Views\Course\Create.cshtml" />
+    <Content Include="Views\Course\Edit.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\AssignedCourse\Index.cshtml" />
+    <Content Include="Views\AssignedCourse\CreateTrainerAssign.cshtml" />
+    <Content Include="Views\AssignedCourse\ChangeTrainerAssign.cshtml" />
+    <Content Include="Views\AssignedCourse\CreateTraineeAssign.cshtml" />
+    <Content Include="Views\AssignedCourse\ChangeTraineeAssign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Categories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -320,6 +348,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102160159317_AddFKtoCategoryTable.resx">
       <DependentUpon>202102160159317_AddFKtoCategoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102220328542_UpdateDbforCourseAndCategories.resx">
+      <DependentUpon>202102220328542_UpdateDbforCourseAndCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102221449167_UpdateDbToCourse.resx">
+      <DependentUpon>202102221449167_UpdateDbToCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102221524047_updateDbAcconut.resx">
+      <DependentUpon>202102221524047_updateDbAcconut.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

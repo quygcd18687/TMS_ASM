@@ -1,0 +1,36 @@
+﻿@model TMS.ViewModels.ChangeAssignForTrainee
+@{
+    ViewBag.Title = "ChangeTrainerAssign";
+}
+
+<h2 style="text-align: center">ChangeTraineeAssign</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Change Trainee Assign</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Courses)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>
+                    @using (Html.BeginForm("ChangeTraineeAssign", "AssignedCourse", "POST"))
+                    {
+                        <div class="form-group">
+                            <input type="hidden" name="CourseId" value="@item.Id">
+                            <input type="hidden" name="TrainerId" value="@Model.Trainee.Id">
+                        </div>
+                        <div>
+                            <button>Change</button>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

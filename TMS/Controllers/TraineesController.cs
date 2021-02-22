@@ -16,17 +16,17 @@ namespace TMS.Controllers
         public ActionResult Index()
         {
             var traineesList = _context.Users.OfType<Trainee>().ToList();
-            return View(traineesList    );
+            return View(traineesList);
         }
-        public ActionResult ViewProfile(string id)
+        public ActionResult ViewProfile(int id)
         {
-            var traineeDb = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.Id == id);
+            var traineeDb = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.UsersId == id);
             return View(traineeDb);
         }
         [HttpGet]
-        public ActionResult Update(string id)
+        public ActionResult Update(int id)
         {
-            var TraineeDb = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.Id == id);
+            var TraineeDb = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.UsersId == id);
             if (TraineeDb == null) return HttpNotFound();
 
             return View(TraineeDb);
@@ -49,9 +49,9 @@ namespace TMS.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
-            var traineeDb = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.Id == id);
+            var traineeDb = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.UsersId == id);
 
             if (traineeDb == null) return HttpNotFound();
 

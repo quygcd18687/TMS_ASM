@@ -1,0 +1,48 @@
+﻿@model TMS.ViewModels.ListCourseView
+@{
+    ViewBag.Title = "CreateTraineeAssign";
+}
+
+<h2>Trainee Not In Course</h2>
+<div>
+    <p>List Trainee Not In Course</p>
+</div>
+
+<table class="table table-bordered">
+    <thread>
+        <tr>
+            <th>UserName</th>
+            <th>ProgramingLanguage</th>
+            <th>DayofBirth</th>
+            <th>Education</th>
+            <th>Location</th>
+            <th>ToeicScore</th>
+            <th>Action</th>
+        </tr>
+    </thread>
+    <tbody>
+        @foreach (var item in Model.Trainees)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.Pro_Language</td>
+                <td>@item.DateOfBirth</td>
+                <td>@item.Education</td>
+                <td>@item.Location</td>
+                <td>@item.ToeicScore</td>
+                <td>
+                    @using (Html.BeginForm("CreateTraineeAssign", "AssignedCourse", "POST"))
+                    {
+                        <div>
+                            <input type="hidden" name="CourseId" value="@Model.Course.Id">
+                            <input type="hidden" name="TraineeId" value="@item.Id">
+                        </div>
+                        <div>
+                            <button type="submit">Add</button>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

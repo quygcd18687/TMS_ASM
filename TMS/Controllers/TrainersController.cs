@@ -21,9 +21,9 @@ namespace TMS.Controllers
             return View(trainersList);
         }
         [HttpGet]
-        public ActionResult Update(string id)
+        public ActionResult Update(int id)
         {
-            var taskInDb = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == id);
+            var taskInDb = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.UsersId == id);
             if (taskInDb == null) return HttpNotFound();
 
             return View(taskInDb);
@@ -49,14 +49,14 @@ namespace TMS.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult Details(string id)
+        public ActionResult Details(int id)
         {
-            var trainerDb = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == id);
+            var trainerDb = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.UsersId == id);
             return View(trainerDb);
         }
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
-            var trainerDb = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == id);
+            var trainerDb = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.UsersId == id);
 
             if (trainerDb == null) return HttpNotFound();
 
