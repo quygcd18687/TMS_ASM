@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using TMS.Models;
 using TMS.ViewModels;
 using System.Data.Entity;
 namespace TMS.Controllers
 {
-
-
-	public class CourseController : Controller
+	public class CoursesController : Controller
 	{
-
 		private ApplicationDbContext _context;
-		public CourseController()
+		public CoursesController()
 		{
 			_context = new ApplicationDbContext();
 		}
@@ -42,38 +36,45 @@ namespace TMS.Controllers
 
 		public ActionResult Create(Course course)
 		{
-			if (!ModelState.IsValid)
+			var courseInDb = _context.Courses.Where(t => t.Name == course.Name);
+			if (course.Name =="")
 			{
-				return View();
+				return RedirectToAction("Create");
 			}
-			var newCourse = new Course()
+			if (courseInDb.Count() > 0)
 			{
-				Name = course.Name,
-				Description = course.Description,
-				Category = course.Category
-			};
-
-			_context.Courses.Add(newCourse);
-			_context.SaveChanges();
-			return RedirectToAction("Index");
+				return RedirectToAction("Create");
+			}
+			if(!ModelState.IsValid)
+            {
+				return RedirectToAction("Create");
+            }
+			else
+			{
+				var newCourse = new Course()
+				{
+					Name = course.Name,
+					Description = course.Description,
+					CategoryId = course.CategoryId
+				};
+				_context.Courses.Add(newCourse);
+				_context.SaveChanges();
+				return RedirectToAction("Index");
+			}
+			
 		}
 
-
-
-		/// <summary>
-		/// This function is used for course editing
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
 		[HttpGet]
 		public ActionResult Edit(int id)
 		{
 			var courseInDb = _context.Courses.SingleOrDefault(t => t.Id == id);
-			var categoriesInDb = _context.Categories;
 			if (courseInDb == null) return HttpNotFound();
-			//var categories = categoriesInDb.toList();
-			//ViewBag.Categories = new SelectList(categories, "Id", "Name", "Desceription");
-			return View(courseInDb);
+			var viewModel = new CourseCategoryViewModels()
+			{
+				Course = courseInDb,
+				Categories = _context.Categories.ToList()
+			};
+			return View(viewModel);
 		}
 
 		[HttpPost]
@@ -81,30 +82,38 @@ namespace TMS.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				return View();
+				var viewModel = new CourseCategoryViewModels()
+				{
+					Course = course,
+					Categories = _context.Categories.ToList()
+				};
+				return View(viewModel);
 			}
-			var InforCourseInDb = _context.Courses.SingleOrDefault(t => t.Id == course.Id);
-
-			if (InforCourseInDb == null) return HttpNotFound();
-
 			var courseInDb = _context.Courses.SingleOrDefault(t => t.Id == course.Id);
-
 			courseInDb.Name = course.Name;
 			courseInDb.Description = course.Description;
-			courseInDb.Category = course.Category;
-		
+			courseInDb.CategoryId = course.CategoryId;
 			_context.SaveChanges();
 			return RedirectToAction("Index");
 		}
 
 		public ActionResult Delete(int id)
-
 		{
-
 			var courseInDb = _context.Courses.SingleOrDefault(t => t.Id == id);
-
 			if (courseInDb == null) return HttpNotFound();
+			var trainer = _context.Trainers.Where(t => t.CourseId == id);
+			foreach (var item in trainer)
+			{
+				item.course = null;
+				item.CourseId = null;
+			}
+			var trainee = _context.Trainees.Where(t => t.CourseId == id);
+			foreach (var item in trainee)
+			{
+				item.course = null;
+				item.CourseId = null;
 
+			}
 			_context.Courses.Remove(courseInDb);
 			_context.SaveChanges();
 			return RedirectToAction("Index");

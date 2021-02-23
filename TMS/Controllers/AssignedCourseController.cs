@@ -15,18 +15,16 @@ namespace TMS.Controllers
         {
             _context = new ApplicationDbContext();
         }
-        public ActionResult Index(int id)
+        public ActionResult Index(int id,string userId)
         {
-           
-            var trainerInCourse = _context.Users.OfType<Trainer>().Where(t => t.UsersId == id).ToList();
-            var traineeInCourse = _context.Users.OfType<Trainee>().Where(t => t.UsersId == id).ToList();
+            var trainerInCourse = _context.Users.OfType<Trainer>().Where(t => t.Id == userId).ToList();
+            var traineeInCourse = _context.Users.OfType<Trainee>().Where(t => t.Id == userId).ToList();
             var CategoryOfCourse = _context.Categories.Where(m => m.Id == id).ToList();
                     
             var listCourseView = new ListCourseView()
             {
                 Trainers = trainerInCourse,
                 Trainees = traineeInCourse,
-                
                 Course = _context.Courses.SingleOrDefault(c => c.Id == id) 
 
             };
@@ -45,18 +43,18 @@ namespace TMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTrainerAssign(string CourseId, int TrainerId)
+        public ActionResult CreateTrainerAssign(string CourseId, string TrainerId)
         {
             int courseId = Convert.ToInt32(CourseId);
-            var trainer = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.UsersId == TrainerId);
+            var trainer = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == TrainerId);
             trainer.CourseId = courseId;
             _context.SaveChanges();
             return RedirectToAction("Index/", new { id = CourseId });
         }
         [HttpGet]
-        public ActionResult ChangeTrainerAssign(int CourseId, int id)
+        public ActionResult ChangeTrainerAssign(int CourseId, string id)
         {
-            var trainerChange = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.UsersId == id);
+            var trainerChange = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == id);
             var CoursesExclude = _context.Courses.Where(c => c.Id != CourseId);
 
             var changeViewmodel = new ChangeAssignForTrainer()
@@ -68,19 +66,19 @@ namespace TMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeTrainerAssign(string CourseId, int id)
+        public ActionResult ChangeTrainerAssign(string CourseId, string id)
         {
             int courseId = Convert.ToInt32(CourseId);
-            var trainer = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.UsersId == id);
+            var trainer = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == id);
             trainer.CourseId = courseId;
             _context.SaveChanges();
             return RedirectToAction("Index/", new { Id = CourseId });
         }
         [HttpPost]
-        public ActionResult DeleteTrainerAssign(string CourseId, int TrainerId)
+        public ActionResult DeleteTrainerAssign(string CourseId, string TrainerId)
         {
             int courseId = Convert.ToInt32(CourseId);
-            var trainer = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.UsersId == TrainerId);
+            var trainer = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == TrainerId);
             trainer.CourseId = null;
             _context.SaveChanges();
             return RedirectToAction("Index/" + CourseId);
@@ -101,19 +99,19 @@ namespace TMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTraineeAssign(string CourseId, int TraineeId)
+        public ActionResult CreateTraineeAssign(string CourseId, string TraineeId)
         {
             int courseId = Convert.ToInt32(CourseId);
-            var trainee = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.UsersId == TraineeId);
+            var trainee = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.Id == TraineeId);
             trainee.CourseId = courseId;
             _context.SaveChanges();
             return RedirectToAction("Index/" + CourseId);
         }
 
         [HttpGet]
-        public ActionResult ChangeTraineeAssign(int CourseId, int TraineeId)
+        public ActionResult ChangeTraineeAssign(int CourseId, string TraineeId)
         {
-            var traineechange = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.UsersId == TraineeId);
+            var traineechange = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.Id == TraineeId);
             var coursesexclude = _context.Courses.Where(c => c.Id != CourseId);
 
             var changeViewmodel = new ChangeAssignForTrainee()
@@ -125,19 +123,19 @@ namespace TMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeTraineeAssign(string CourseId, int TrainerId)
+        public ActionResult ChangeTraineeAssign(string CourseId, string TrainerId)
         {
             int courseId = Convert.ToInt32(CourseId);
-            var trainee = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.UsersId == TrainerId);
+            var trainee = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.Id == TrainerId);
             trainee.CourseId = courseId;
             _context.SaveChanges();
             return RedirectToAction("Index", new { id = CourseId });
         }
         [HttpPost]
-        public ActionResult DeleteTraineeAssign(string CourseId, int TraineeId)
+        public ActionResult DeleteTraineeAssign(string CourseId, string TraineeId)
         {
             int courseId = Convert.ToInt32(CourseId);
-            var trainee = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.UsersId == TraineeId);
+            var trainee = _context.Users.OfType<Trainee>().SingleOrDefault(t => t.Id == TraineeId);
             trainee.CourseId = null;
             _context.SaveChanges();
             return RedirectToAction("Index/" + CourseId);

@@ -20,10 +20,7 @@
                 <td>@item.Email</td>
                 <td>@item.UserName</td>
                 <td class="btn-group">
-                    @Html.ActionLink("Details this account", "Details", "Staffs",
-                                                           new { id = item.Id },
-                                                           new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Edit this account", "Update", "Staffs",
+                    @Html.ActionLink("Edit this account", "Edit", "Staffs",
                                                           new { id = item.Id },
                                                           new { @class = "btn btn-dark" })
                     @Html.ActionLink("Delete this Account", "Delete", "Staffs",

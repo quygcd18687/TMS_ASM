@@ -1,14 +1,17 @@
-﻿using System;
-using System.Globalization;
+﻿
+using TMS.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using TMS.Models;
+using System;
+using System.Globalization;
+using TMS.ViewModels;
+using System.Data.Entity;
 
 namespace TMS.Controllers
 {
@@ -17,9 +20,10 @@ namespace TMS.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext _context;
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -51,9 +55,100 @@ namespace TMS.Controllers
                 _userManager = value;
             }
         }
+        public ActionResult ViewProfile()
+        {
+            var userIdCurrent = User.Identity.GetUserId();
+            var usersView = _context.Users.SingleOrDefault(u => u.Id == userIdCurrent);
+            if (User.IsInRole("trainer"))
+            {
+                var TrainersView = _context.Trainers.SingleOrDefault(t => t.Id == usersView.Id);
+                /* var courseTrainer = _context.Courses.SingleOrDefault(c => c.Id == trainerInWeb.CourseId);*/
+                var trainerInf = new AccountProfile()
+                {
+                    UsersView = usersView,
+                    TrainersView = TrainersView
+                };
+                return View(trainerInf);
+            }
+            if (User.IsInRole("trainee"))
+            {
+                var traineeInWeb = _context.Trainees.SingleOrDefault(t => t.Id == usersView.Id);
+                var traineeInfor = new AccountProfile()
+                {
+                    UsersView = usersView,
+                    TraineesView = traineeInWeb
+                };
+                return View(traineeInfor);
+            }
+
+            var userInfor = new AccountProfile()
+            {
+                UsersView = usersView
+            };
+            return View(userInfor);
+
+        }
+        public ActionResult ViewCourses()
+        {
+            var userIdCurrent = User.Identity.GetUserId();
+            var usersView = _context.Users.SingleOrDefault(u => u.Id == userIdCurrent);
+            if (User.IsInRole("trainer"))
+            {
+                var trainersView = _context.Trainers.SingleOrDefault(t => t.Id == usersView.Id);
+                var trainerCourse = _context.Courses.SingleOrDefault(c => c.Id == trainersView.CourseId);
+                var courses = _context.Courses.Include(c => c.Category).ToList();
+                var trainerInfor = new AccountProfile()
+                {
+                    UsersView = usersView,
+                    TrainersView = trainersView
+                };
+                return View(trainerCourse);
+            }
+            else if (User.IsInRole("trainee"))
+            {
+                var traineeView = _context.Trainees.SingleOrDefault(t => t.Id == usersView.Id);
+                var traineeCourse = _context.Courses.SingleOrDefault(c => c.Id == traineeView.CourseId);
+                var courses = _context.Courses.Include(c => c.Category).ToList();
+                var traineeInfor = new AccountProfile()
+                {
+                    UsersView = usersView,
+                    TraineesView = traineeView
+                };
+                return View(traineeCourse);
+            }
+            return HttpNotFound();
+        }
+
+        [Authorize(Roles = "trainer")]
+        [HttpGet]
+        public ActionResult UpdateTrainerProfile()
+        {
+            var userIdCurrent = User.Identity.GetUserId();
+            ApplicationUser userView = _context.Users.FirstOrDefault(x => x.Id == userIdCurrent);
+            var trainerProFile = _context.Trainers.SingleOrDefault(t => t.Id == userView.Id);
+
+            var trainerInFor = new AccountProfile()
+            {
+                UsersView = userView,
+                TrainersView = trainerProFile
+            };
+            return View(trainerInFor);
+        }
+        [HttpPost]
+        public ActionResult UpdateTrainerProfile(Trainer trainer)
+        {
+            var trainerProInDb = _context.Trainers.SingleOrDefault(t => t.Id == trainer.Id);
+            trainerProInDb.PhoneNumber = trainer.PhoneNumber;
+            trainerProInDb.WorkingPlace = trainer.WorkingPlace;
+            trainerProInDb.Type = trainer.Type;
+            _context.SaveChanges();
+            return RedirectToAction("ViewProfile");
+        }
 
         //
         // GET: /Account/Login
+
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {

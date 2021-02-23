@@ -3,9 +3,8 @@
 
 <h2>Update Profile</h2>
 
-@using (Html.BeginForm("Edit", "Course", "POST"))
+@using (Html.BeginForm("Edit", "Courses", "POST"))  
 {
-
     <div class="form-group">
         @Html.HiddenFor(model => model.Course.Id)
         @Html.LabelFor(model => model.Course.Name)
@@ -28,8 +27,7 @@
         <button type="submit" class="btn btn-primary">Update Course</button>
     </div>
 }
-@Html.ActionLink("Back to Category Index", "Index", "Courses",
+@Html.ActionLink("Back", "Index", "Courses",
     null,
     new { @class = "btn btn-primary" })
-
 

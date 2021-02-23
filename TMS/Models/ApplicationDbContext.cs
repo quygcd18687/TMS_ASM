@@ -8,7 +8,7 @@ namespace TMS.Models
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
-        { 
+        {
         }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Category> Categories { get; set; }

@@ -4,7 +4,7 @@
 }
 
 <h2>Manage Category</h2>
-<h3 class="btn btn-default" style="margin-bottom: 7px;">@Html.ActionLink("Create Category", "Create", "Category")</h3>
+<h3 class="btn btn-default" style="margin-bottom: 7px;">@Html.ActionLink("Create Category", "Create", "Categories")</h3>
 
 <table class="table table-bordered">
     <thead>
@@ -25,8 +25,8 @@
                 <td>@item.Name</td>
                 <td>@item.Description</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Category", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Delete", "Delete", "Category", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Edit", "Edit", "Categories", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", "Categories", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
