@@ -17,30 +17,54 @@ namespace TMS.Controllers
         }
         public ActionResult Index()
         {
-            var trainerlist = _context.Users.ToList();
-            return View(trainerlist);
+             var trainersList = _context.Users.OfType<Trainer>().ToList();
+            return View(trainersList);
         }
         [HttpGet]
-        public ActionResult UpdateProfile(string id)
+        public ActionResult Update(string id)
         {
-           
-            var Trainers = _context.Users.SingleOrDefault(t => t.Id == id);
-            if (Trainers == null) return HttpNotFound();
+            var taskInDb = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == id);
+            if (taskInDb == null) return HttpNotFound();
 
-            return View(Trainers);
+            return View(taskInDb);
         }
-        //[HttpPost]
-        //public ActionResult UpdateProfile(Trainer trainer)
-        //{
-        //    var Trainers = _context.Users.SingleOrDefault(t => t.Id == trainer.Id);
+        [HttpPost]
+        public ActionResult Update(Trainer trainer)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
 
-        //    Trainers.UserName = trainer.UserName;
-        //    Trainers.WorkingPlace = trainer.WorkingPlace;
-        //    Trainers.Type = trainer.Type;
+            var TrainerDb = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == trainer.Id);
+            {
+                
+                TrainerDb.UserName = trainer.UserName;
+                TrainerDb.DateOfBirth = trainer.DateOfBirth;
+                TrainerDb.PhoneNumber = trainer.PhoneNumber;
+                TrainerDb.WorkingPlace = trainer.WorkingPlace;
+                TrainerDb.Email = trainer.Email;
+                TrainerDb.Type = trainer.Type;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult Details(string id)
+        {
+            var trainerDb = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == id);
+            return View(trainerDb);
+        }
+        public ActionResult Delete(string id)
+        {
+            var trainerDb = _context.Users.OfType<Trainer>().SingleOrDefault(t => t.Id == id);
 
-        //    _context.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+            if (trainerDb == null) return HttpNotFound();
+
+            _context.Trainers.Remove(trainerDb);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
-    
+
 }

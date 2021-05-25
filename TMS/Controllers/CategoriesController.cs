@@ -42,11 +42,12 @@ namespace TMS.Controllers
             {
                 return View();
             }
-            var newCategory = new Category();
-
-
-            newCategory.Name = category.Name;
-            newCategory.Description = category.Description;
+            if (!ModelState.IsValid) return View();
+            var newCategory = new Category()
+            {
+                Name = category.Name,
+                Description = category.Description,
+            };
 
             _context.Categories.Add(newCategory);
             _context.SaveChanges();

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title -FPT System </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -17,14 +17,41 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Training Management System ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("FPT System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Profiles", "Index", "Trainees") </li>
+                    @if (User.IsInRole("staff"))
+                    {
+
+                        <li class="nav-item">@Html.ActionLink("Trainer", "Index", "Trainers", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Trainee", "Index", "Trainees", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Course", "Index", "Courses", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Category", "Index", "Categories", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", null, new { Style = "color:white" })</li>
+                    }
+                    @if (User.IsInRole("trainer"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("View Assigned Course", "ViewCourse", "Account", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Profile", "ViewProfile", "Account", null, new { Style = "color:white" })</li>
+
+                        <li class="nav-item">@Html.ActionLink("Change Password", "ChangePasswordUser", "Account", null, new { Style = "color:white" })</li>
+                    }
+                    @if (User.IsInRole("trainee"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("View Assigned Course", "ViewCourse", "Account", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Profile", "ViewProfile", "Account", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Change Password", "ChangePasswordUser", "Account", null, new { Style = "color:white" })</li>
+                    }
+
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("AccountStaff", "Index", "Staffs", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("AccountTrainer", "Index", "Trainers", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", null, new { Style = "color:white" })</li>
+                    }
+
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,12 +61,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>
-                &copy; @DateTime.Now.Year -  Đại học Greenwich (Việt Nam), cơ sở Đà Nẵng
-                Địa chỉ: Số 658 Ngô Quyền, phường An Hải Bắc, quận Sơn Trà, Đà Nẵng
-                Phòng TC&QLĐT: Điện thoại: 02367. 305.767, Email: acad.gre.dn@fe.edu.vn
-                Phòng CTSV: Điện thoại: 02367. 305.767, Email: sro.gre.dn@fe.edu.vn
-            </p>
+            <p>&copy; @DateTime.Now.Year - Daay la footer</p>
         </footer>
     </div>
 

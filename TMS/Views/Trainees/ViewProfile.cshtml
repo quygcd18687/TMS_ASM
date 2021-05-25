@@ -1,24 +1,38 @@
 ﻿@model TMS.Models.Trainee
-@{
+@{ 
     ViewBag.Title = "ViewProfile";
 }
 
-<h2>Trainee Details</h2>
+<h2>Profile of this trainee</h2>
 
-<tbody>
-   
-        <tr>
-            <td>@Model.Id</td>
-            <td>@Model.UserName</td>
-            <td>@Model.Education</td>
-            <td>@Model.Email</td>
-            <td>@Model.Pro_Language</td>
-            
+<table class="table table-bordered">
+    <thead>
+        <tr style="background-color: #e9a1df ; text-align:center; ">
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Day Of Birth</th>
+            <th>Education</th>
+            <th>ProgramingLanguage</th>
+            <th>ToeicScore</th>
+            <th>Experience</th>
+            <th>Location</th>
+
         </tr>
-    
-</tbody>
-<div>
-            @Html.ActionLink("Back", "Index", "Trainees",
-        null,
-        new { @class = "btn btn-primary" })
-</div>
+    </thead>
+    <tbody>
+        <tr style="color:black; text-align:center">
+            <td>@Model.UserName</td>
+            <td>@Model.Email</td>
+            <td>@Model.DateOfBirth</td>
+            <td>@Model.Education</td>
+            <td>@Model.Pro_Language</td>
+            <td>@Model.ToeicScore</td>
+            <td>@Model.Experience</td>
+            <td>@Model.Location</td>
+        </tr>
+    </tbody>
+</table>
+
+@Html.ActionLink("Back to Index", "Index", "Trainees",
+    null,
+    new { @class = "btn btn-primary" })

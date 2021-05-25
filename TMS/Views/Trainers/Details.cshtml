@@ -1,0 +1,31 @@
+﻿@model TMS.Models.Trainer
+@{ ViewBag.Title = "Details";
+}
+
+<h2>Profile of this trainer</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr style="background-color: #e9a1df ; text-align:center; ">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone number</th>
+            <th>Type</th>
+            <th>Working Location</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="color:black; text-align:center">
+            <td>@Model.UserName</td>
+            <td>@Model.Email</td>
+            <td>@Model.PhoneNumber</td>
+            <td>@Model.Type</td>
+            <td>@Model.WorkingPlace</td>
+        </tr>
+    </tbody>
+</table>
+
+@Html.ActionLink("Back to Index", "Index", "Trainers",
+    null,
+    new { @class = "btn btn-primary" })

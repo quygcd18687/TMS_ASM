@@ -1,28 +1,39 @@
-﻿@model  IEnumerable<TMS.Models.Course>
+﻿@model IEnumerable<TMS.Models.Course>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>All Course</h2>
+<h2>Manage Course</h2>
+<h3 class="btn btn-default" style="margin-bottom: 7px;">@Html.ActionLink("Create Course", "Create", "Courses")</h3>
+
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>STT</th>
-            <th>Subject Name</th>
-            <th>Teacher</th>
+            <td>#</td>
+            <td>Name</td>
+            <td>Category</td>
+            <td>Description</td>
+            <td>Actions</td>
         </tr>
+
     </thead>
+
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.SubjId</td>
-                <td>@item.SubjName</td>
-                <td>@item.Teacher</td>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Category.Name</td>
+                <td>@item.Description</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", "Courses", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("List Trainer and Trainee", "Index", "AssignedCourse", new { id = item.Id }, new { @class = "btn btn-primary" })
+                </td>
             </tr>
         }
     </tbody>
 </table>
-@Html.ActionLink("Back", "Index", "Trainees",
-    null,
-    new { @class = "btn btn-primary" })
+
+

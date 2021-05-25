@@ -3,29 +3,39 @@
     ViewBag.Title = "Index";
 }
 <h2>Trainer Infomations</h2>
-@Html.ActionLink("Update", "UpdateProfile", "Trainers", null, new { @class = "btn btn-primary" })
 
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Trainer #</th>
+
             <th>Trainer Name</th>
             <th>Age</th>
-            <th>phone</th>
+            <th>phone</th>  
             <th>Email</th>
-            <th>Course</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Age</td>
-                <td>@item.Phone</td>
+
+                <td>@item.UserName</td>
+                <td>@item.DateOfBirth</td>
+                <td>@item.PhoneNumber</td>
                 <td>@item.Email</td>
-                <th>@item.Course</th>
+                <td>
+                    @Html.ActionLink("Details Infomation", "Details", "Trainers",
+                                                          new { id = item.Id },
+                                                          new { @class = "btn btn-primary", style = "margin :10px" })
+                    @Html.ActionLink("Update this Trainer", "Update", "Trainers",
+                                                          new { id = item.Id },
+                                                          new { @class = "btn btn-danger", style = "margin :10px" })
+                    @Html.ActionLink("Delete This trainer", "Delete", "Trainers",
+                                                          new { id = item.Id },
+                                                          new { @class = "btn btn-primary", style = "margin :10px" })
+
+                </td>
             </tr>
         }
     </tbody>
